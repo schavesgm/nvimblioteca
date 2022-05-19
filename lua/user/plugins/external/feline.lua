@@ -3,8 +3,6 @@ if not status_ok then return end
 local status_ok, kanagawa = pcall(require, "kanagawa.colors")
 if not status_ok then return end
 
-print(require('feline.providers.git').git_info_exists())
-
 -- Set feline theme from kanagawa
 local colors = kanagawa.setup()
 local theme  = {
@@ -134,6 +132,7 @@ components.inactive = {
             },
             hl = {style='bold'},
             right_sep = {str = ' '},
+            left_sep   = {str = '  ', hl={fg=theme.oceanblue}},
         },
         {
             provider = function() 
