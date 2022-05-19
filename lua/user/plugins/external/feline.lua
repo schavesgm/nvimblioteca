@@ -1,13 +1,13 @@
-local status_ok, feline = pcall(require, "feline")
-if not status_ok then return end
-local status_ok, kanagawa = pcall(require, "kanagawa.colors")
-if not status_ok then return end
+local status_feline, feline = pcall(require, "feline")
+if not status_feline then return end
+local status_kanagawa, kanagawa = pcall(require, "kanagawa.colors")
+if not status_kanagawa then return end
 
 -- Set feline theme from kanagawa
 local colors = kanagawa.setup()
 local theme  = {
     fg        = colors.oldWhite,
-    bg        = colors.sumiInk0, 
+    bg        = colors.sumiInk0,
     black     = colors.sumiInk0,
     white     = colors.oldWhite,
     green     = colors.springGreen,
@@ -50,7 +50,7 @@ components.active = {
             right_sep = {str = ' '},
         },
         {
-            provider = function() 
+            provider = function()
                 local is_mod =  vim.fn['getbufinfo']('%')[1].changed
                 return (is_mod == 1) and '  ' or ''
             end,
@@ -66,28 +66,25 @@ components.active = {
             hl = {fg = theme.orange, style = 'bold'},
             right_sep = {str='  ', hl={fg=theme.bg, bg=theme.oceanblue}},
         },
-    },
-    -- Center part of the statusline
-    {
         {
             provider = 'diagnostic_info',
             hl = {fg=theme.orange, bg=theme.oceanblue},
-            right_sep = {str = ' ', hl={fg=theme.oceanblue, bg=theme.oceanblue}},
         },
         {
             provider = 'diagnostic_hints',
             hl = {fg=theme.magenta, bg=theme.oceanblue},
-            right_sep = {str = ' ', hl={fg=theme.oceanblue, bg=theme.bg}},
         },
         {
             provider = 'diagnostic_warnings',
             hl = {fg=theme.orange, bg=theme.oceanblue},
-            right_sep = {str = ' '},
         },
         {
             provider = 'diagnostic_errors',
             hl = {fg=theme.red, bg=theme.oceanblue},
         },
+    },
+    -- Center part of the statusline
+    {
     },
     -- Right part of the statusline
     {
@@ -117,6 +114,7 @@ components.active = {
         {
             provider = 'lsp_client_names',
             hl = {fg=theme.skyblue, bg=theme.bg, style='bold'},
+            right_sep = {str = ' '},
         },
     },
 }
@@ -135,7 +133,7 @@ components.inactive = {
             left_sep   = {str = '  ', hl={fg=theme.oceanblue}},
         },
         {
-            provider = function() 
+            provider = function()
                 local is_mod =  vim.fn['getbufinfo']('%')[1].changed
                 return (is_mod == 1) and '  ' or ''
             end,
@@ -149,7 +147,6 @@ components.inactive = {
         {
             provider = 'git_branch',
             hl = {fg = theme.orange, style = 'bold'},
-            -- right_sep = {str=' ', hl={fg=theme.bg, bg=theme.oceanblue}},
         },
     },
     -- Right part of the inactive status bar
