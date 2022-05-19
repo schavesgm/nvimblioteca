@@ -1,4 +1,6 @@
 -- Table containing the default keymaps of the system
+local diagnostics_active = true
+
 return {
     -- Insert mode keybindings
     insert_mode = {
@@ -55,6 +57,16 @@ return {
                 vim.o.laststatus = 3
             end
         end,
+
+        -- Toggle the diagnostics from LSP
+        ['<leader>d'] = function()
+            if not diagnostics_active then
+                vim.diagnostic.show()
+            else
+                vim.diagnostic.hide()
+            end
+            diagnostics_active = not diagnostics_active
+        end                
     },
 
     -- Terminal model mappings
