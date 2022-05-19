@@ -24,7 +24,10 @@ return {
 	['hrsh7th/cmp-nvim-lua']     = {},
 	['saadparwaiz1/cmp_luasnip'] = {},
 
-	    -- Snippets
+    -- Text manipulation
+    ['windwp/nvim-autopairs'] = {config=load_config("nvim-autopairs")},
+
+	-- Snippets
 	['L3MON4D3/LuaSnip']             = {},
 	['rafamadriz/friendly-snippets'] = {},
 
