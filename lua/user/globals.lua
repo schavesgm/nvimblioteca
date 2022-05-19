@@ -28,13 +28,3 @@ function _G.is_file(path)
     local stat = vim.loop.fs_stat(path)
     return stat and stat.type == "file" or false
 end
-
--- Load a module using a protected call
-function _G.pload(module)
-    local status_ok, package = pcall(require, module)
-    if not status_ok then
-        vim.notify(module .. ' cannot be loaded.', vim.log.levels.WARN)
-        return
-    end
-    return package
-end
