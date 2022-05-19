@@ -29,10 +29,7 @@ return {
 	['rafamadriz/friendly-snippets'] = {},
 
 	-- Treesitter and related
-	['nvim-treesitter/nvim-treesitter'] = {
-	   run=':TSUpdate', 
-	   config=load_config("nvim-treesitter"),
-	},
+	['nvim-treesitter/nvim-treesitter'] = {run=':TSUpdate', config=load_config("nvim-treesitter"),},
 	['p00f/nvim-ts-rainbow'] = {},
 
 	-- Statusbar
@@ -52,4 +49,5 @@ return {
 
     -- Add some local plugins
     [join_paths(config_path, 'lua/local/formatequal.nvim')] = {config=function() require("formatequal").setup() end},
+    [join_paths(config_path, 'lua/local/texpar.nvim')]      = {},
 }

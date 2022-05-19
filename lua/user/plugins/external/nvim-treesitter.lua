@@ -1,8 +1,8 @@
 -- Load the configuration in a secure call
-local loaded, configs = pcall(require, "nvim-treesitter.configs")
+local loaded, treesitter = pcall(require, "nvim-treesitter.configs")
 if not loaded then return end
 
-configs.setup {
+treesitter.setup {
     -- Ensure all maintained extensions are installed
     ensure_installed = "all",
     sync_install = true,
@@ -18,11 +18,9 @@ configs.setup {
     incremental_selection = {
         enable = true,
         keymaps = {
-            init_selection    = "gss",
-            node_incremental  = "gin",
-            node_decremental  = "gdn",
-            scope_incremental = "gis",
-            scope_decremental = "gds",
+            init_selection    = "<leader>w",
+            node_incremental  = "]w",
+            node_decremental  = "[w",
         },
     },
 
@@ -36,8 +34,6 @@ configs.setup {
         enable = true,
         extended_mode = true,
         max_file_lines = nil,
-        -- colors = {}, -- table of hex strings
-        -- termcolors = {} -- table of colour name strings
     },
     autopairs = {
         enable = true
