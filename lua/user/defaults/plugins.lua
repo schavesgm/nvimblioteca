@@ -48,7 +48,8 @@ return {
 	['lewis6991/gitsigns.nvim'] = {config=load_config("gitsigns")},
 
 	-- Utility plugins
-	['kyazdani42/nvim-web-devicons'] = {},
+	['kyazdani42/nvim-web-devicons']   = {},
+    ['lukas-reineke/indent-blankline.nvim'] = {config=load_config("indent-blankline")},
 
     -- Add some local plugins
     [join_paths(config_path, 'lua/local/formatequal.nvim')] = {config=function() require("formatequal").setup() end},
