@@ -26,6 +26,7 @@ local function load_defaults()
         inccommand = 'split',                    -- Shows the effect of a command while you type it
         infercase = true,                        -- Allow Nvim to infer the case in autocomplete
         showtabline = 2,                         -- Show the tablines - name of the files on top - always
+	laststatus = 3,                          -- Use a global status line by default
 
         -- Navigation options
         wrap = false,                            -- Display lines as one long line instead of wrapping them

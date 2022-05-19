@@ -27,7 +27,7 @@ local mode_names = {
 function M.unset_keymaps(keymaps)
     for mode, mappings in pairs(keymaps) do
         for key, _ in pairs(mappings) do
-            vim.api.nvim_del_keymap(mode, key)
+            vim.keymap.del(mode, key)
         end
     end
 end
@@ -36,30 +36,32 @@ end
 -- @param (table) table containing all keymaps
 function M.set_keymaps(keymaps)
     for mode, mappings in pairs(keymaps) do
-        if (mode_names[mode] == nil) then
+        local mode_name = mode_names[mode]
+        if (mode_name == nil) then
             vim.notify(mode .. ' is not an available mode. Ignoring')
-            vim.notify('Available keys are:')
+            vim.notify('Available modes are:')
             vim.notify(vim.inspect(utils.get_keys(mode_names)))
             goto continue
         end
 
-        local mode_name = mode_names[mode]
+        -- Set the mapping, the key contains the command and then the result
+        for lhs, rhs in pairs(mappings) do
 
-        for key, value in pairs(mappings) do
-            local opts = base_options[mode_name] or {noremap=true, silent=true}
-            local maps = value
-
-            if type(value) == "table" then
-                maps = value[1]
-                opts = value[2]
+            -- If the rhs is nil, then delete the mapping
+            if not rhs then
+                vim.keymap.del(mode_name, lhs)
             end
 
-            -- If the value is nil, delete the mapping instead
-            if maps then
-                vim.api.nvim_set_keymap(mode_name, key, maps, opts)
-            else
-                pcall(vim.api.nvim_del_keymap, mode_name, key)
+            local mapping = rhs
+            local options = base_options[mode]
+
+            -- If the mapping is a table, then process it
+            if type(rhs) == "table" then
+                mapping = rhs.rhs  or rhs[1]
+                options = rhs.opts or rhs[2]
             end
+
+            vim.keymap.set(mode_name, lhs, mapping, options)
         end
         ::continue::
     end
