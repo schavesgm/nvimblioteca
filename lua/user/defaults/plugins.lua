@@ -42,7 +42,7 @@ return {
 	},
 
 	-- Git integration
-	['lewis6991/gitsigns.nvim'] = {config=function() require("gitsigns").setup() end},
+	['lewis6991/gitsigns.nvim'] = {config=load_config("gitsigns")},
 
 	-- Utility plugins
 	['kyazdani42/nvim-web-devicons'] = {},
