@@ -49,4 +49,7 @@ return {
 
 	-- Utility plugins
 	['kyazdani42/nvim-web-devicons'] = {},
+
+    -- Add some local plugins
+    [join_paths(config_path, 'lua/local/formatequal.nvim')] = {config=function() require("formatequal").setup() end},
 }
