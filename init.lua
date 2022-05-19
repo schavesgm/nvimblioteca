@@ -6,4 +6,4 @@ if not vim.tbl_contains(vim.opt.rtp:get(), base_dir) then
     vim.opt.rtp:append(base_dir)
 end
 
-require("user.bootstrap"):init()
+require("user.bootstrap"):init(base_dir)
