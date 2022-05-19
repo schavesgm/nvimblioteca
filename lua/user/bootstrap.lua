@@ -11,7 +11,10 @@ end
 -- Load all the utility global functions
 require("user.globals")
 
-function M:init()
+function M:init(config_path)
+
+    -- Set a variable with the configuration path
+    _G.config_path = config_path
 
     -- Load the default options of the system
     require("user.core.options"):init()
@@ -22,8 +25,11 @@ function M:init()
     -- Load the default keybindings of the system
     require("user.core.keymaps"):init()
 
-    -- -- Load the plugin configuration of the system
+    -- Load the plugin configuration of the system
     require("user.core.plugins"):init()
+
+    -- Load the lsp configuration
+    require("user.lsp"):init()
 end
 
 -- Reload the configuration
