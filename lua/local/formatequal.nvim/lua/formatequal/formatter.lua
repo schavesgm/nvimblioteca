@@ -4,17 +4,11 @@ local str_insert      = require'formatequal.helpers'.str_insert
 
 -- Look for the longest column in a set of lines where a reference char is present
 local function get_longest_column(lines, reference_char)
-
-    -- Buffer containing the longest column containing sign
     local longest_col = -1
 
     -- Iterate for all lines
     for _, line in ipairs(lines) do
-
-        -- Ignore empty lines or comment lines
         if line == "" or line:find('^#') ~= nil then goto continue end
-
-        -- Get the position of the sign
         local char_pos = line:find(reference_char)
 
         -- If one line does not contain the sign character, then return -1
@@ -31,11 +25,7 @@ end
 
 -- Format some lines according to a given reference character
 local function make_equal_format(lines, line_nr, reference_char)
-
-    -- Get the longest column containing the = sign
     local longest = get_longest_column(lines, reference_char)
-
-    -- First, check that all lines contain the same sign character
     if longest < 0 then return false end
 
     -- Iterate through all lines in the collection

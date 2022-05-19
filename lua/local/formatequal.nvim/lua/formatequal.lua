@@ -3,26 +3,29 @@ local M = {}
 -- Load the formatter function
 local format_function = require'formatequal.formatter'.make_equal_format
 
+-- Local variable that sets None to a given filetype
+M.IGNORE = 0
+
 -- Main function of the module, used to format the data
 function M.format_hierarchically()
 
-    -- Get the filetype of the current buffer
-    local ft = vim.bo.filetype:gsub('^%l', string.upper)
+    local ft       = vim.bo.filetype:gsub('^%l', string.upper)
+    local settings = M.settings[ft]
 
-    -- Get the characters to be used according to the settings
-    local hierarchy_chars = M.settings[ft]
-
-    -- If the characters are not defined, then raise and error
-    if (hierarchy_chars == nil) then
-        vim.notify(vim.bo.filetype .. ' is not a valid filetype for formatequal')
-        return false
+    -- If settings is IGNORE, ignore this call
+    if settings == M.IGNORE then
+        vim.notify(string.format('formatequal is ignored in %s files', ft), vim.log.levels.WARN)
+        return
     end
 
-    -- Get the line and the line number of the selection
+    local hierarchy = {'='}
+    if settings then
+        hierarchy = settings
+    end
+
     local lines   = vim.fn['getline'](vim.fn['line']("'<"), vim.fn['line']("'>'"))
     local line_nr = vim.fn['line']("'<") - 1
-
-    for _, char in pairs(hierarchy_chars) do
+    for _, char in pairs(hierarchy) do
         if format_function(lines, line_nr, char) then
             return true
         end
@@ -32,24 +35,17 @@ end
 
 -- Default options used in the system
 function M.set_defaults()
-    -- TODO: Update this in the future if more data is needed
     M.settings = {
-        Python = {'=', ':'},
-        Lua    = {'='},
-        Cpp    = {'='},
-        C      = {'='},
+        Python   = {'=', ':'},
+        Tex      = M.IGNORE,
+        Markdown = M.IGNORE,
     }
 end
 
 -- Setup function used to set some hierarchical special characters
 function M.setup(settings)
-    -- First, set the defaults any case
     M.set_defaults()
-
-    -- If the table passed is empty, then just continue
     if not settings then return end
-
-    -- Merge both tables overriding the defaults
     M.settings = vim.tbl_deep_extend('force', M.settings, settings)
 end
 
