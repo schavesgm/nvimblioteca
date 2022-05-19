@@ -1,11 +1,10 @@
 local M = {}
 
 function M:init()
-
     -- Check if LSP is available
     local status_ok, _ = pcall(require, "lspconfig")
     if not status_ok then
-        vim.notify('lspconfig cannot be accesed. Ignoring', vim.log.levels.WARN)
+        vim.notify('lspconfig cannot be accesed. Aborting lsp configuration.', vim.log.levels.WARN)
         return
     end
 
