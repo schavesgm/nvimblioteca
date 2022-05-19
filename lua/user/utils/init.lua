@@ -1,7 +1,7 @@
 local M = {}
 
 -- Deepcopy a table
--- @returns table
+-- @returns [table]
 function M.deepcopy_table(table)
 	local copy = {}
 	for k, v in pairs(table) do
@@ -14,7 +14,7 @@ function M.deepcopy_table(table)
 end
 
 -- Pop the key of a table and return its value
--- @returns any
+-- @returns [any]
 function M.pop_key(key, table)
     local value = table[key]
     table[key] = nil
@@ -22,7 +22,7 @@ function M.pop_key(key, table)
 end
 
 -- Get all keys from a table as a table
--- @returns table
+-- @returns [table]
 function M.get_keys(table)
     local keys  = {}
     local count = 1
@@ -33,12 +33,12 @@ function M.get_keys(table)
     return keys
 end
 
--- Check if element is in table
+-- Check if element is in array-like table
 -- @params: value [str]
 -- @params: array [table]
--- @returns bool
+-- @returns [bool]
 function M.is_inside_array(value, array)
-	for idx, val in ipairs(array) do
+	for _, val in ipairs(array) do
         if val == value then
             return true
         end

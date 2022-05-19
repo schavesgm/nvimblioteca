@@ -9,7 +9,7 @@ if vim.fn.has "nvim-0.7" ~= 1 then
 end
 
 -- Load all the utility global functions
-require("user.globals")
+require("user.utils.globals")
 
 function M:init(config_path)
 
