@@ -33,4 +33,17 @@ function M.get_keys(table)
     return keys
 end
 
+-- Check if element is in table
+-- @params: value [str]
+-- @params: array [table]
+-- @returns bool
+function M.is_inside_array(value, array)
+	for idx, val in ipairs(array) do
+        if val == value then
+            return true
+        end
+    end
+    return false
+end
+
 return M

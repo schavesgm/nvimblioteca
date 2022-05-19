@@ -68,7 +68,7 @@ function M.set_keymaps(keymaps)
 end
 
 function M:init()
-    M.set_keymaps(require("user.config.defaults").keymaps)
+    M.set_keymaps(require("user.defaults").get_defaults("keymaps"))
 end
 
 return M

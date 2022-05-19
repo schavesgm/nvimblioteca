@@ -31,7 +31,7 @@ end
 
 -- Set the default autocommands on the system
 function M:init()
-    M.set_autocommands(require("user.config.defaults").autocmds)
+    M.set_autocommands(require("user.defaults").get_defaults("autocmds"))
 end
 
 return M

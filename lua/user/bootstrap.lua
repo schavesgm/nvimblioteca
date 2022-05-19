@@ -14,16 +14,16 @@ require("user.globals")
 function M:init()
 
     -- Load the default options of the system
-    require("user.config.options"):init()
+    require("user.core.options"):init()
 
     -- Load the default autocommands of the system
-    require("user.config.autocmds"):init()
+    require("user.core.autocmds"):init()
 
     -- Load the default keybindings of the system
-    require("user.config.keymaps"):init()
+    require("user.core.keymaps"):init()
 
-    -- Load the plugin configuration of the system
-    require("user.config.plugins"):init()
+    -- -- Load the plugin configuration of the system
+    require("user.core.plugins"):init()
 end
 
 -- Reload the configuration

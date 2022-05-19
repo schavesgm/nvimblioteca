@@ -1,7 +1,7 @@
 local M = {}
 
 local fn = vim.fn
-local autocmds = require("user.config.autocmds")
+local autocmds = require("user.core.autocmds")
 
 function M:init()
 
@@ -47,7 +47,7 @@ function M:init()
 	    -- Allow packer to manage itself
 	    use {'wbthomason/packer.nvim'}
 
-        for name, table in pairs(require("user.config.defaults").plugins) do
+        for name, table in pairs(require("user.defaults").get_defaults("plugins")) do
             local plugin_config = vim.tbl_deep_extend("keep", {name}, table)
             use (plugin_config)
         end
