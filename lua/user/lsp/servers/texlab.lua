@@ -7,6 +7,20 @@ local function get_root(fname)
     return util.root_pattern('.latexmkrc', 'main.tex')(fname) or util.find_git_ancestor(fname)
 end
 
+-- Create two autocommands for texlab
+local autocmds = require("user.core.autocmds")
+local group = vim.api.nvim_create_augroup("TexLab", {clear=false})
+autocmds.set_autocommands({
+    TexLab = {
+        autocmds.create_autocmd("FileType",
+            {pattern="tex", command=[[nnoremap <silent> <leader>r :TexlabBuild<Cr>]],   group=group}
+        ),
+        autocmds.create_autocmd("FileType",
+            {pattern="tex", command=[[nnoremap <silent> <leader>t :TexlabForward<Cr>]],   group=group}
+        ),
+    }
+})
+
 return  {
     cmd = {"texlab"},
     filetypes = {"tex", "lib"},
