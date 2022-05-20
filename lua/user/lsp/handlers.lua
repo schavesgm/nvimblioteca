@@ -77,8 +77,8 @@ local function lsp_keymaps(bufnr)
     vim.keymap.set('n', 'K',     vim.lsp.buf.hover,          opts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
 
-    vim.keymap.set('n', ']d', function() vim.lsp.diagnostic.goto_next({border="rounded"}) end, opts)
-    vim.keymap.set('n', '[d', function() vim.lsp.diagnostic.goto_prev({border="rounded"}) end, opts)
+    vim.keymap.set('n', ']d', function() vim.diagnostic.goto_next({border="rounded"}) end, opts)
+    vim.keymap.set('n', '[d', function() vim.diagnostic.goto_prev({border="rounded"}) end, opts)
 
     vim.keymap.set('n', '<leader>q',  vim.diagnostic.setloclist, opts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,        opts)
