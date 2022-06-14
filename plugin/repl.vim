@@ -1,2 +1,2 @@
-"" lua require("repl")
-echo 'Que pasa mi gente'
+" Set the default data in the manager
+lua require("manager").setup()
