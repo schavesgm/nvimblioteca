@@ -20,8 +20,14 @@ function M:init()
     autocmds.set_autocommands({
         PackerUserConfig = {
             autocmds.create_autocmd(
-                "BufWritePost",
-                {pattern="plugins.lua", command=[[source <afile> | PackerSync]]}
+                "BufWritePost", {
+                    pattern="plugins.lua",
+                    callback=function()
+                        vim.cmd('source ' .. join_paths(_G.config_path, 'lua/user/core/plugins.lua'))
+                        vim.cmd('source ' .. vim.fn['expand']('<afile>:p'))
+                        vim.cmd(':PackerSync')
+                    end
+                }
             ),
         }
     })

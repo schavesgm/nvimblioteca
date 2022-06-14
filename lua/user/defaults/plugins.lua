@@ -6,14 +6,16 @@ end
 
 -- Table containing all the plugin definitions of the system
 return {
-
 	-- Colourschemes
 	['rebelot/kanagawa.nvim'] = {config=load_config("kanagawa")},
 
 	-- Language-server LSP
-	['neovim/nvim-lspconfig'] = {},
+	['neovim/nvim-lspconfig']           = {},
 	['williamboman/nvim-lsp-installer'] = {},
-	['folke/lsp-colors.nvim'] = {},
+	['folke/lsp-colors.nvim']           = {},
+    ['rmagatti/goto-preview']           = {config=load_config("goto-preview")},
+    ['kosayoda/nvim-lightbulb']         = {config=load_config("nvim-lightbulb")},
+    ['weilbith/nvim-code-action-menu']  = {cmd='CodeActionMenu'},
 
 	-- Autocompletion
 	['hrsh7th/nvim-cmp']         = {config=load_config("nvim-cmp"),},
@@ -44,14 +46,27 @@ return {
 	    }
 	},
 
+    -- Fuzzy finders
+    ['nvim-telescope/telescope.nvim'] = {
+        requires={
+            {'nvim-lua/plenary.nvim', opts=true},
+            {'nvim-lua/popup.nvim', opts=true},
+        },
+        config=load_config("telescope")
+    },
+    ['nvim-telescope/telescope-media-files.nvim'] = {},
+
 	-- Git integration
 	['lewis6991/gitsigns.nvim'] = {config=load_config("gitsigns")},
 
 	-- Utility plugins
-	['kyazdani42/nvim-web-devicons']   = {},
+	['kyazdani42/nvim-web-devicons'] = {},
     ['lukas-reineke/indent-blankline.nvim'] = {config=load_config("indent-blankline")},
 
     -- Add some local plugins
     [join_paths(config_path, 'lua/local/formatequal.nvim')] = {config=function() require("formatequal").setup() end},
     [join_paths(config_path, 'lua/local/texpar.nvim')]      = {},
+
+    -- To be added in the future
+    -- ['~/Repositories/Nvim/repl.nvim'] = {},
 }
