@@ -36,6 +36,7 @@ function M.setup()
     -- Add the configuration of LSP
     vim.diagnostic.config(config)
 
+    --- Add some handlers to the configuration
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
         border = "rounded",
     })
@@ -82,7 +83,10 @@ local function lsp_keymaps(bufnr)
 
     vim.keymap.set('n', '<leader>q',  vim.diagnostic.setloclist, opts)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename,        opts)
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action,   opts)
+
+    -- Code action mapping
+    local callback = vim.fn['exists'](':CodeActionMenu') and ":CodeActionMenu<Cr>" or vim.lsp.buf.code_action
+    vim.keymap.set('n', '<leader>ca', callback, opts)
 
     vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
