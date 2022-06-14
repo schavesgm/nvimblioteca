@@ -17,9 +17,5 @@ return {
         MarkupAutocmds = {
             create_autocmd("FileType", {pattern={"tex", "text", "markdown"}, command=[[setlocal textwidth=100 colorcolumn=100]]}),
             create_autocmd("FileType", {pattern={"tex", "text", "markdown"}, command=[[setlocal spell]]}),
-
-            -- TODO: These ones should be called only if TexLab is installed
-            -- create_autocmd("FileType", {pattern="tex", command=[[nnoremap <silent> <leader>r :TexlabBuild<Cr>]]}),
-            -- create_autocmd("FileType", {pattern="tex", command=[[nnoremap <silent> <leader>t :TexlabForward<Cr>]]}),
         },
 }
