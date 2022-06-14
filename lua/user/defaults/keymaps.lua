@@ -49,7 +49,7 @@ return {
         ['<leader>l'] = ':set list!<CR>',
 
         -- Make the statusline global
-        ['<leader>g'] = function()
+        ['<leader>x'] = function()
             local sl_status = vim.o.laststatus
             if sl_status == 3 then
                 vim.o.laststatus = 2
@@ -66,7 +66,7 @@ return {
                 vim.diagnostic.hide()
             end
             diagnostics_active = not diagnostics_active
-        end                
+        end,
     },
 
     -- Terminal model mappings
