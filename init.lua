@@ -7,3 +7,6 @@ if not vim.tbl_contains(vim.opt.rtp:get(), base_dir) then
 end
 
 require("user.bootstrap"):init(base_dir)
+
+-- Add some custom plugins to the runtimepath
+vim.opt.runtimepath:append("~/Repositories/Nvim/repl.nvim")
