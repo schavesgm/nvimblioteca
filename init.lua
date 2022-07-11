@@ -9,4 +9,4 @@ end
 require("user.bootstrap"):init(base_dir)
 
 -- Add some custom plugins to the runtimepath
-vim.opt.runtimepath:append("~/Repositories/Nvim/repl.nvim")
+vim.opt.runtimepath:append(_G.join_paths(base_dir, 'lua/local/repl.nvim'))
