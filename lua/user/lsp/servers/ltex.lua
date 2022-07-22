@@ -18,21 +18,18 @@ end
 return  {
     settings = {
         ltex = {
-            language = "en-GB",
-            additionalRules = {
-                enablePickyRules = false,
+            language           = "en-GB",
+            dictionary         = ignore_words,
+            diagnosticSeverity = "information",
+            checkFrequency     = "edit",
+            completionEnabled  = true,
+            disabledRules      = {
+                ["en-GB"] = {"OXFORD_SPELLING_Z_NOT_S"},
+            },
+            additionalRules    = {
                 motherTongue = "es",
             },
-            diagnosticSeverity = "information",
-            sentenceCacheSize = 5000,
-            checkFrequency = "edit",
-            completionEnabled = false,
             logLevel = {"fine"},
-            dictionary = ignore_words,
-            disabledRules = {
-                ["en-GB"] = {"OXFORD_SPELLING_NOUNS"},
-                ["en"]    = {"OXFORD_SPELLING_NOUNS"},
-            }
         },
     },
 }

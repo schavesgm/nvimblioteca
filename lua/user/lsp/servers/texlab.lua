@@ -13,10 +13,10 @@ local group = vim.api.nvim_create_augroup("TexLab", {clear=false})
 autocmds.set_autocommands({
     TexLab = {
         autocmds.create_autocmd("FileType",
-            {pattern="tex", command=[[nnoremap <silent> <leader>r :TexlabBuild<Cr>]],   group=group}
+            {pattern="tex", command=[[nnoremap <silent> <leader>r :TexlabBuild<Cr>]], group=group}
         ),
         autocmds.create_autocmd("FileType",
-            {pattern="tex", command=[[nnoremap <silent> <leader>t :TexlabForward<Cr>]],   group=group}
+            {pattern="tex", command=[[nnoremap <silent> <leader>t :TexlabForward<Cr>]], group=group}
         ),
     }
 })
