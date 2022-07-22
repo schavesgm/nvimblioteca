@@ -98,6 +98,14 @@ M.on_attach = function(client, bufnr)
     end
     lsp_keymaps(bufnr)
     lsp_highlight_document(client)
+
+    local status_ok, lsp_signature = pcall(require, "lsp_signature")
+    if status_ok then
+        lsp_signature.on_attach({
+            bind = true, -- This is mandatory, otherwise border config won't get registered.
+            handler_opts = {"rounded"},
+        }, bufnr)
+    end
 end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 

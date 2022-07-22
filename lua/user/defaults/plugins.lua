@@ -16,6 +16,7 @@ return {
     ['rmagatti/goto-preview']           = {config=load_config("goto-preview")},
     ['kosayoda/nvim-lightbulb']         = {config=load_config("nvim-lightbulb")},
     ['weilbith/nvim-code-action-menu']  = {cmd='CodeActionMenu'},
+    ['ray-x/lsp_signature.nvim']        = {},
 
 	-- Autocompletion
 	['hrsh7th/nvim-cmp']         = {config=load_config("nvim-cmp"),},
