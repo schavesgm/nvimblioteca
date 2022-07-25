@@ -8,20 +8,20 @@ if vim.fn.has "nvim-0.7" ~= 1 then
     vim.cmd "cquit"
 end
 
--- Notify the absence of some programs before starting
-local needs_presence = {'npm', 'node'}
-for _, command in ipairs(needs_presence) do
-    local is_present = vim.fn.executable(command) == 1
-     if not is_present then
-        local string = string.format('Required program %s is missing in system', command)
-        vim.notify(string, vim.log.levels.ERROR)
-     end
-end
-
 -- Load all the utility global functions
 require("user.utils.globals")
 
 function M:init(config_path)
+
+    -- Notify the absence of some programs before starting
+    local needs_presence = {'npm', 'node'}
+    for _, command in ipairs(needs_presence) do
+        local is_present = (vim.fn.executable(command) == 1)
+         if not is_present then
+            local string = string.format('Required program %s is missing in system', command)
+            vim.notify(string, vim.log.levels.ERROR)
+         end
+    end
 
     -- Set a variable with the configuration path
     _G.config_path = config_path
