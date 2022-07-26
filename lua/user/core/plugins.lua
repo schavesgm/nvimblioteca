@@ -4,7 +4,6 @@ local fn = vim.fn
 local autocmds = require("user.core.autocmds")
 
 function M:init()
-
     -- Path where packer will be installed
     local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
     if fn.empty(fn.glob(install_path)) > 0 then
@@ -17,7 +16,7 @@ function M:init()
     end
 
     -- Add an autocommand to synchronize Packer once it is written
-    autocmds.set_autocommands({
+    autocmds.set_augroup_autocmds({
         PackerUserConfig = {
             autocmds.create_autocmd(
                 "BufWritePost", {
