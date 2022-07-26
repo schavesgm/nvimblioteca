@@ -25,8 +25,9 @@ local mode_names = {
 -- Unset all the keymaps contained in table
 -- @param (table) table containing all keymaps
 function M.unset_keymaps(keymaps)
-    for mode, mappings in pairs(keymaps) do
-        for key, _ in pairs(mappings) do
+    for mode, keystrokes in pairs(keymaps) do
+        mode = mode_names[mode] or mode
+        for _, key in ipairs(keystrokes) do
             vim.keymap.del(mode, key)
         end
     end

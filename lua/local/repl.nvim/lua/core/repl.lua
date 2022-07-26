@@ -30,7 +30,6 @@ function Repl.open(self, position)
     vim.api.nvim_set_current_win(self.float.window)
 
     -- Channel where the terminal is hosted.
-    -- TODO: Make this filetype dependent
     self.channel = vim.fn.termopen(self.__repl)
 
     -- Set the name of the buffer
