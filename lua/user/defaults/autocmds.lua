@@ -8,8 +8,6 @@ local function start_timed_callback(callback, start, every)
     return function()
         local bufnr  = vim.api.nvim_buf_get_name(0)
         local lambda = vim.schedule_wrap(function() callback(bufnr) end)
-
-        -- Instantiate a timer and start it with the appropriate function
         timers[bufnr] = vim.loop.new_timer()
         timers[bufnr]:start(start, every, lambda)
     end
@@ -39,22 +37,22 @@ end
 
 -- Table containing all autogroups/autocommands definitions
 return {
-        RestoreCursor = {
-            create_autocmd("BufRead", {pattern="*", command=[[call setpos(".", getpos("'\""))]]})
-        },
-        TerminalJob = {
-            create_autocmd("TermOpen", {pattern="*", command=[[tnoremap <buffer> <Esc> <c-\><c-n>]]}),
-            create_autocmd("TermOpen", {pattern="*", command="startinsert"}),
-            create_autocmd("TermOpen", {pattern="*", command=[[setlocal nonumber norelativenumber]]}),
-            create_autocmd("TermOpen", {pattern="*", command=[[setlocal filetype=term]]}),
-        },
-        SaveToShada = {
-            create_autocmd("VimLeave", {pattern="*", command="wshada!"}),
-        },
-        MarkupAutocmds = {
-            create_autocmd("FileType", {pattern={"tex", "text", "markdown"}, command=[[setlocal textwidth=100 colorcolumn=100]]}),
-            create_autocmd("FileType", {pattern={"tex", "text", "markdown"}, command=[[setlocal spell]]}),
-            create_autocmd("BufEnter", {pattern={"*.tex", "*.md"}, callback=start_timed_callback(save_buffer, to_milisecodns(3), to_milisecodns(3))}),
-            create_autocmd("BufLeave", {pattern={"*.tex", "*.md"}, callback=end_timed_callback})
-        },
+    RestoreCursor = {
+        create_autocmd("BufRead", {pattern="*", command=[[call setpos(".", getpos("'\""))]]})
+    },
+    TerminalJob = {
+        create_autocmd("TermOpen", {pattern="*", command=[[tnoremap <buffer> <Esc> <c-\><c-n>]]}),
+        create_autocmd("TermOpen", {pattern="*", command="startinsert"}),
+        create_autocmd("TermOpen", {pattern="*", command=[[setlocal nonumber norelativenumber]]}),
+        create_autocmd("TermOpen", {pattern="*", command=[[setlocal filetype=term]]}),
+    },
+    SaveToShada = {
+        create_autocmd("VimLeave", {pattern="*", command="wshada!"}),
+    },
+    MarkupAutocmds = {
+        create_autocmd("FileType", {pattern={"tex", "text", "markdown"}, command=[[setlocal textwidth=100 colorcolumn=100]]}),
+        create_autocmd("FileType", {pattern={"tex", "text", "markdown"}, command=[[setlocal spell]]}),
+        create_autocmd("BufEnter", {pattern={"*.tex", "*.md"}, callback=start_timed_callback(save_buffer, to_milisecodns(3), to_milisecodns(3))}),
+        create_autocmd("BufLeave", {pattern={"*.tex", "*.md"}, callback=end_timed_callback})
+    },
 }
