@@ -9,7 +9,7 @@ function M.create_autocmd(event, options)
 end
 
 -- Define a set of autogroups with their respective autocommands
-function M.set_autocommands(autocommands)
+function M.set_augroup_autocmds(autocommands)
     for augroup, autocmds in pairs(autocommands) do
         local group = vim.api.nvim_create_augroup(augroup, {clear=true})
 
@@ -31,7 +31,7 @@ end
 
 -- Set the default autocommands on the system
 function M:init()
-    M.set_autocommands(require("user.defaults").get_defaults("autocmds"))
+    M.set_augroup_autocmds(require("user.defaults").get_defaults("autocmds"))
 end
 
 return M
