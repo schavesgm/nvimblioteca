@@ -1,23 +1,45 @@
-local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
-if not status_ok then return end
+local status_1, lspconfig = pcall(require, "lspconfig")
+local status_2, mason     = pcall(require, "mason-lspconfig")
+local status_3, cmp_lsp   = pcall(require, "cmp_nvim_lsp")
+if not status_1 or not status_2 then return end
 
--- Get all server settings
-local all_server_opts = require("user.lsp.servers")
-
--- Register a handler that will be called for all installed servers.
-lsp_installer.on_server_ready(function(server)
-
-    -- Options for the server attachment
-    local opts = {
- 	    on_attach    = require("user.lsp.handlers").on_attach,
- 	    capabilities = require("user.lsp.handlers").capabilities,
- 	}
-
-    local server_opts = all_server_opts[server.name]
-    if server_opts then
- 	    opts = vim.tbl_deep_extend("force", opts, server_opts)
+-- Function to be called when attaching
+local function on_attach(client, bufnr)
+    -- On attach function to attach some highlighting and keymaps
+    if client.name == "tsserver" then
+        client.resolved_capabilities.document_formatting = false
     end
 
- 	-- This setup() function is exactly the same as lspconfig's setup function.
-    server:setup(opts)
-end)
+    -- Set some required functionalities on attach
+    require("user.lsp.utils").lsp_highlight_document(client)
+    require("user.lsp.utils").lsp_keymaps(bufnr)
+
+    local status_ok, lsp_signature = pcall(require, "lsp_signature")
+    if status_ok then
+        lsp_signature.on_attach({
+            bind = true, -- This is mandatory, otherwise border config won't get registered.
+            handler_opts = {"rounded"},
+        }, bufnr)
+    end
+end
+
+-- Get all the server settings
+local server_configs = require("user.lsp.servers")
+
+-- Iterate through all pairs 
+for _, server in ipairs(mason.get_installed_servers()) do
+
+    -- Basic server configuration
+    local config = {
+        on_attach    = on_attach,
+        capabilities = status_3 and cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities()) or nil
+    }
+
+    -- If a configuration is present, then add it
+    if server_configs[server] ~= nil then
+        config = vim.tbl_deep_extend("force", config, server_configs[server])
+    end
+
+    -- Call the setup method
+    lspconfig[server].setup(config)
+end

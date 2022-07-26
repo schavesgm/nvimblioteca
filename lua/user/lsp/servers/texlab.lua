@@ -10,7 +10,7 @@ end
 -- Create two autocommands for texlab
 local autocmds = require("user.core.autocmds")
 local group = vim.api.nvim_create_augroup("TexLab", {clear=false})
-autocmds.set_autocommands({
+autocmds.set_augroup_autocmds({
     TexLab = {
         autocmds.create_autocmd("FileType",
             {pattern="tex", command=[[nnoremap <silent> <leader>r :TexlabBuild<Cr>]], group=group}
@@ -33,7 +33,7 @@ return  {
             build = {
                 args = {"-pdf", "-interaction=nonstopmode", "-synctex=1", "-lualatex", get_root("%f")},
                 executable = "latexmk",
-                forwardSearchAfter = false,
+                forwardSearchommandsAfter = false,
                 onSave = false
             },
             chktex = {
