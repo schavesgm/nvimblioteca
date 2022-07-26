@@ -35,11 +35,13 @@ function M:init(config_path)
     -- Load the default keybindings of the system
     require("user.core.keymaps"):init()
 
-    -- Load the plugin configuration of the system
-    require("user.core.plugins"):init()
-
-    -- Load the lsp configuration
+    -- Load the LSP configuration of the system
     require("user.lsp"):init()
+
+    -- Load the plugin and lsp configuration if possible
+    if not _G.in_headless() then
+        require("user.core.plugins"):init()
+    end
 end
 
 -- Reload the configuration
