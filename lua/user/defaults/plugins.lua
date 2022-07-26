@@ -1,7 +1,7 @@
 -- Load the configuration file with current name
 -- @name str: plugin name
 local function load_config(name)
-    require("user.plugins.external." .. name)
+    require("user.plugins." .. name)
 end
 
 -- Table containing all the plugin definitions of the system
@@ -10,13 +10,14 @@ return {
 	['rebelot/kanagawa.nvim'] = {config=load_config("kanagawa")},
 
 	-- Language-server LSP
-	['neovim/nvim-lspconfig']           = {},
-	['williamboman/nvim-lsp-installer'] = {},
-	['folke/lsp-colors.nvim']           = {},
-    ['rmagatti/goto-preview']           = {config=load_config("goto-preview")},
-    ['kosayoda/nvim-lightbulb']         = {config=load_config("nvim-lightbulb")},
-    ['weilbith/nvim-code-action-menu']  = {cmd='CodeActionMenu'},
-    ['ray-x/lsp_signature.nvim']        = {},
+	['neovim/nvim-lspconfig']             = {},
+    ['williamboman/mason.nvim']           = {config=load_config("mason")},
+    ['williamboman/mason-lspconfig.nvim'] = {config=load_config("mason-lspconfig")},
+	['folke/lsp-colors.nvim']             = {},
+    ['rmagatti/goto-preview']             = {config=load_config("goto-preview")},
+    ['kosayoda/nvim-lightbulb']           = {config=load_config("nvim-lightbulb")},
+    ['weilbith/nvim-code-action-menu']    = {cmd='CodeActionMenu'},
+    ['ray-x/lsp_signature.nvim']          = {},
 
 	-- Autocompletion
 	['hrsh7th/nvim-cmp']         = {config=load_config("nvim-cmp"),},
@@ -26,6 +27,9 @@ return {
 	['hrsh7th/cmp-nvim-lsp']     = {},
 	['hrsh7th/cmp-nvim-lua']     = {},
 	['saadparwaiz1/cmp_luasnip'] = {},
+
+    -- Linting
+    ['mfussenegger/nvim-lint']   = {config=load_config("nvim-lint")},
 
     -- Text manipulation
     ['windwp/nvim-autopairs'] = {config=load_config("nvim-autopairs")},
