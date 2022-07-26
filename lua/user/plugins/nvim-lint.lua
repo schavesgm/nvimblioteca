@@ -9,11 +9,11 @@ lint.linters_by_ft = {
     python = {'mypy'},
 }
 
--- Set some autocommands to trigger linters
-autocmd.set_augroup_autocmds({
-    LinterTrigger = {
-        autocmd.create_autocmd("BufWritePost", {callback=function()
-            require("lint").try_lint()
-        end})
-    }
-})
+-- -- Set some autocommands to trigger linters
+-- autocmd.set_augroup_autocmds({
+--     LinterTrigger = {
+--         autocmd.create_autocmd("BufWritePost", {callback=function()
+--             require("lint").try_lint()
+--         end})
+--     }
+-- })
