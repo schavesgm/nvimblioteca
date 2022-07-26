@@ -68,7 +68,4 @@ return {
     [join_paths(config_path, 'lua/local/formatequal.nvim')] = {config=function() require("formatequal").setup() end},
     [join_paths(config_path, 'lua/local/texpar.nvim')]      = {},
     [join_paths(config_path, 'lua/local/repl.nvim')]        = {},
-
-    -- To be added in the future
-    -- ['~/Repositories/Nvim/repl.nvim'] = {},
 }
